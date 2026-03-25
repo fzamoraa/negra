@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Jardín para mi Niña</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --celeste: #B3E5FC;
+            --celeste-fuerte: #81D4FA;
+            --rosa-pastel: #FFC1E3;
+            --rosa-fuerte: #F06292;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Mezcla de rosa y su color favorito: Celeste */
+            background: linear-gradient(135deg, var(--rosa-pastel) 0%, var(--celeste) 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+        }
+
+        #jardin-container {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Flor de inicio */
+        .flor-principal {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+
+        .flor-principal:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .flor-svg-main {
+            width: 150px;
+            height: 150px;
+        }
+
+        /* Contenedor de flores infinitas */
+        #flores-capa {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flor-generada {
+            position: absolute;
+            opacity: 0;
+            animation: florecerInfinito 8s linear forwards;
+        }
+
+        @keyframes florecerInfinito {
+            0% {
+                transform: translateY(100vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+                transform: translateY(80vh) scale(1) rotate(45deg);
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-20vh) scale(0.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- SECCIÓN DEL MENSAJE "PREMIUM" --- */
+        #mensaje-final {
+            display: none;
+            position: relative;
+            padding: 50px 40px;
+            width: 80%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            
+            /* Borde elegante con el color favorito: Celeste */
+            border: 3px solid var(--celeste-fuerte);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
+                        inset 0 0 20px rgba(129, 212, 250, 0.3);
+            
+            animation: entradaMensaje 2s ease-out forwards;
+            z-index: 50;
+        }
+
+        /* Tipografía especial para el título */
+        #mensaje-final h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d81b60;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        #mensaje-final p {
+            font-size: 1.25rem;
+            color: #444;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        /* Emoji de corazón animado en alta calidad */
+        .emoji-hd {
+            font-family: 'Noto Color Emoji', sans-serif;
+            font-size: 3rem;
+            display: block;
+            margin-top: 20px;
+            animation: latido 1.2s infinite;
+        }
+
+        @keyframes entradaMensaje {
+            from { opacity: 0; transform: scale(0.8) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .texto-instruccion {
+            color: white;
+            background: rgba(0,0,0,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="jardin-container">
+        
+        <div class="flor-principal" onclick="iniciarMagia()">
+            <svg class="flor-svg-main" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="12" fill="#FFD54F" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--celeste-fuerte)" transform="rotate(0 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--rosa-fuerte)" transform="rotate(45 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--celeste-fuerte)" transform="rotate(90 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--rosa-fuerte)" transform="rotate(135 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--celeste-fuerte)" transform="rotate(180 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--rosa-fuerte)" transform="rotate(225 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--celeste-fuerte)" transform="rotate(270 50 50)" />
+                <ellipse cx="50" cy="22" rx="10" ry="22" fill="var(--rosa-fuerte)" transform="rotate(315 50 50)" />
+            </svg>
+            <div class="texto-instruccion">Toca la flor, mi amor</div>
+        </div>
+
+        <div id="flores-capa"></div>
+
+        <div id="mensaje-final">
+            <h1>Para mi negra hermosa</h1>
+            <p>
+                Eres la persona que llena mis días de color. <br>
+                Te doy infinitas gracias por ser mi compañera, mi amiga y mi motivo de alegría. <br>
+                Te amo con todo mi corazón, mi negra hermosa. <br>
+                Gracias a ti y a la vida por permitirme amarte y compartir mi vida contigo. <br>
+                No hay palabras suficientes para expresar lo mucho que significas para mí. <br>
+            </p>
+            <span class="emoji-hd">💖</span>
+        </div>
+
+    </div>
+
+    <script>
+        let activa = false;
+
+        function iniciarMagia() {
+            if (activa) return;
+            activa = true;
+
+            const florPrincipal = document.querySelector('.flor-principal');
+            const mensaje = document.getElementById('mensaje-final');
+            const capaFlores = document.getElementById('flores-capa');
+
+            // 1. Desaparece la flor inicial
+            florPrincipal.style.opacity = '0';
+            setTimeout(() => florPrincipal.style.display = 'none', 1000);
+
+            // 2. Explosión inicial de flores
+            for(let i = 0; i < 40; i++) {
+                setTimeout(() => crearFlor(capaFlores), Math.random() * 2000);
+            }
+
+            // 3. Generación infinita
+            setInterval(() => {
+                crearFlor(capaFlores);
+            }, 300);
+
+            // 4. Mostrar mensaje
+            setTimeout(() => {
+                mensaje.style.display = 'block';
+            }, 1200);
+        }
+
+        function crearFlor(contenedor) {
+            const div = document.createElement('div');
+            div.className = 'flor-generada';
+            
+            // Posición y tamaño aleatorio
+            const x = Math.random() * 100;
+            const size = Math.random() * (50 - 20) + 20;
+            div.style.left = x + 'vw';
+            div.style.width = size + 'px';
+            div.style.height = size + 'px';
+            
+            // Colores: Incluimos mucho CELESTE y rosas
+            const colores = ['#B3E5FC', '#81D4FA', '#E1F5FE', '#F06292', '#F48FB1', '#FFC1E3'];
+            const colorCualquiera = colores[Math.floor(Math.random() * colores.length)];
+
+            div.innerHTML = `
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="12" fill="#FFEB3B" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(0 50 50)" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(60 50 50)" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(120 50 50)" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(180 50 50)" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(240 50 50)" />
+                    <ellipse cx="50" cy="25" rx="12" ry="25" fill="${colorCualquiera}" transform="rotate(300 50 50)" />
+                </svg>
+            `;
+
+            contenedor.appendChild(div);
+
+            // Limpieza para que no pese la página después de mucho tiempo
+            div.addEventListener('animationend', () => div.remove());
+        }
+    </script>
+</body>
+</html>
